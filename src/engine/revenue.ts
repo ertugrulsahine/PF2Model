@@ -1,0 +1,2 @@
+import type { Period, ProjectModel } from '../types/project';
+export function calculateRevenue(p: ProjectModel, periods: Period[]): number[] { let op=0; return periods.map(x=>{ if(!x.isOperations) return 0; const years=op*x.yearFraction; const volume=p.revenue.capacity*p.revenue.availability*Math.pow(1-p.revenue.degradation, years)*x.yearFraction*p.sensitivities.volume; const price=p.revenue.price*Math.pow(1+p.revenue.priceEscalation, years)*p.sensitivities.price; op++; return volume*price*(1+p.revenue.merchantUpsidePct); }); }

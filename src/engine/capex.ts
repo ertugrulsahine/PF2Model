@@ -1,0 +1,2 @@
+import type { ProjectModel } from '../types/project';
+export function calculateCapex(p: ProjectModel): number[] { const base=(p.capex.hardCosts+p.capex.softCosts)*(1+p.capex.contingencyPct)*p.sensitivities.capex; const curve=p.capex.spendCurve; const sum=curve.reduce((a,b)=>a+b,0)||1; return Array.from({length:p.timeline.periods},(_,i)=> i<p.timeline.constructionPeriods ? base*((curve[i] ?? 0)/sum) : 0); }

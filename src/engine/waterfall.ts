@@ -1,0 +1,1 @@
+export function calculateWaterfall(ebitda:number[], tax:number[], wc:number[], debtService:number[], dsra:number[]) { let prev=0; return ebitda.map((e,i)=>{ const dsraFunding=Math.max(0,dsra[i]-prev); prev=dsra[i]; return Math.max(0,e-tax[i]-wc[i]-debtService[i]-dsraFunding); }); }
